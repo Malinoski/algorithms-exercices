@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 n = np.linspace(1, 10, 1000)
 
 # labels for plot
-labels = ["Constant", "Logarithmic", "Linear", "Log Linear", "Quadradic", "Cubic", "Exponential"]
+labels = ["Constant", "Logarithmic", "Linear", "Log Linear", "Quadradic", "Cubic", "Exponential"]                
 
 # Data with different complex functions
 big_o = [
@@ -17,7 +17,7 @@ big_o = [
     n*np.log(n),            # Log Linear: Create array nlog(n)
     n**2,                   # Quadradic: Create array nˆ2
     n**3,                   # Cubic: Create array nˆ3
-    2**n                    # Exponential: Create array 2ˆn (the worse of then)
+    2**n,                   # Exponential: Create array 2ˆn (the worse of then)
 ]
 
 # Plot the graphic
