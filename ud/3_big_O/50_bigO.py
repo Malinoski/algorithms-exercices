@@ -24,7 +24,7 @@ big_o = [
 plt.figure(figsize=(10, 8))
 plt.ylim(0, 100)
 for i in range(len(big_o)):
-    plt.plot(n, big_o[i], label=labels)
+    plt.plot(n, big_o[i], label=labels[i])
 plt.legend()
 plt.ylabel('Runtime')
 plt.xlabel('n')
