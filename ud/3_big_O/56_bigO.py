@@ -4,7 +4,10 @@ class NotOrderedVector:
 
     def __init__(self, size: int):
         self.size: int = size
-        self.values: numpy.ndarray = numpy.empty(shape=self.size, dtype=int)
+        
+        self.values: numpy.ndarray = numpy.empty(self.size, dtype=int)
+        # self.values: list = [None for _ in range(self.size)] # you can use this instead
+
         self.last_index = -1
         print("Vector: ", type(self.values))
     
@@ -42,9 +45,10 @@ class NotOrderedVector:
         index_target = self.find_element_vector(target_value)
         if index_target == -1:
             print(f"Cant remove element {target_value} (not found)")
+            return -1
         else:
             print(f"Removing {self.values[index_target]} ...")
-            for index in range(index_target, self.size-1):
+            for index in range(index_target, self.last_index):
                 self.values[index] = self.values[index+1]
         self.last_index -= 1
 
@@ -85,3 +89,4 @@ v.print_vector()
 # Remove
 v.remove_element(1)
 v.print_vector()
+print(v.values)
