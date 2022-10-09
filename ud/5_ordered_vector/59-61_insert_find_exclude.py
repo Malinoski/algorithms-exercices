@@ -20,32 +20,31 @@ class OrderedVector:
                 print(f"{index} - {self.values[index]}")
 
     # O(n)
-    def insert(self, new_value):
+    def insert(self, value):
 
-        # Check if vector is full (returning -1 if full) - O(1)
-        if self.last_index == self.size:
-            return -1
+        # If full
+        if self.last_index+1 == self.size:
+            return -1 
 
-        # Search index to insert - for O(n)
-        index_to_insert = 0 # Useful to insert the first value
+        # Find position to insert
+        position_insert = 0
         for i in range(self.last_index+1):
-            if new_value<self.values[i]:
-                index_to_insert = i
+            if value < self.values[i]:
+                position_insert = i
                 break
+            # include at last
             if i == self.last_index:
-                index_to_insert = self.last_index+1
+                position_insert = i+1
         
-        # Reorder remainging elements, from end to index to insert - for O(n)
-        for i in range(self.last_index+1, index_to_insert, -1):
+        # Relocate vector
+        for i in range(self.last_index+1, position_insert, -1):
             self.values[i] = self.values[i-1]
-        
-        # Update last index
+
+        # Insert new value at position to insert
+        self.values[position_insert] = value
         self.last_index += 1
-
-        # Insert value at index - O(1)
-        self.values[index_to_insert] = new_value
-        return index_to_insert
-
+        return position_insert
+    
     # O(n)
     def find(self, value):
         for i in range(self.last_index+1):
@@ -75,8 +74,7 @@ class OrderedVector:
         self.last_index -=1
         return True
 
-
-v = OrderedVector(size=10)
+v = OrderedVector(size=5)
 
 print("\nInsert 5 ...", v.insert(5))
 v.print()
@@ -90,7 +88,13 @@ v.print()
 print("\nInsert 1 ...", v.insert(1))
 v.print()
 
-print("\nFind 4 ...", v.find(7))
+print("\nInsert 2 ...", v.insert(2))
+v.print()
+
+print("\nInsert 11 ...", v.insert(11))
+v.print()
+
+print("\nFind 7 ...", v.find(7))
 print("\nFind 1 ...", v.find(1))
 print("\nFind 9 ...", v.find(9))
 
