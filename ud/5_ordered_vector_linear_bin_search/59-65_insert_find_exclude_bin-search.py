@@ -46,7 +46,7 @@ class OrderedVector:
         return position_insert
     
     # O(n)
-    def find(self, value):
+    def find_linear(self, value):
         for i in range(self.last_index+1):
             if value < self.values[i]:
                 # If less than first in an ordered vector, so the element do not exist
@@ -58,10 +58,33 @@ class OrderedVector:
         # Not found
         return -1
 
+    # O(log n)
+    def find_binary(self, value):
+
+        start_index = 0
+        end_index = self.last_index
+
+        while(start_index <= end_index):
+
+            middle_index = int((start_index + end_index) / 2)
+
+            if self.values[middle_index] == value:
+                # Found!
+                return middle_index
+            elif value < self.values[middle_index]:
+                # Update indexes to LEFT
+                end_index = middle_index-1
+            else:
+                # Update indexes to RIGHT
+                start_index = middle_index+1
+        
+        # Not found
+        return -1
+
     def exclude(self, value):
         
         # Find value's index
-        index_value = self.find(value=value)
+        index_value = self.find_linear(value=value)
 
         if index_value == -1:
             return False
@@ -74,7 +97,7 @@ class OrderedVector:
         self.last_index -=1
         return True
 
-v = OrderedVector(size=5)
+v = OrderedVector(size=10)
 
 print("\nInsert 5 ...", v.insert(5))
 v.print()
@@ -94,17 +117,27 @@ v.print()
 print("\nInsert 11 ...", v.insert(11))
 v.print()
 
-print("\nFind 7 ...", v.find(7))
-print("\nFind 1 ...", v.find(1))
-print("\nFind 9 ...", v.find(9))
+print("\nInsert 6 ...", v.insert(6))
+v.print()
 
-print("\nExclude 10 ...", v.exclude(10))
-v.print()
-print("\nExclude 1 ...", v.exclude(1))
-v.print()
-print("\nExclude 7 ...", v.exclude(7))
-v.print()
-print("\nExclude 4 ...", v.exclude(4))
-v.print()
-print("\nExclude 5 ...", v.exclude(5))
-v.print()
+print("\nFind lin 7 ...", v.find_linear(7))
+print("Find lin 1 ...", v.find_linear(1))
+print("Find lin 9 ...", v.find_linear(9))
+
+print("Find bin 5 ...", v.find_binary(5))
+print("Find bin 4 ...", v.find_binary(4))
+print("Find bin 1 ...", v.find_binary(1))
+print("Find bin 99 ...", v.find_binary(99))
+
+
+
+# print("\nExclude 10 ...", v.exclude(10))
+# v.print()
+# print("\nExclude 1 ...", v.exclude(1))
+# v.print()
+# print("\nExclude 7 ...", v.exclude(7))
+# v.print()
+# print("\nExclude 4 ...", v.exclude(4))
+# v.print()
+# print("\nExclude 5 ...", v.exclude(5))
+# v.print()
