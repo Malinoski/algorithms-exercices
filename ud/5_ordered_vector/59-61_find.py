@@ -13,7 +13,6 @@ class OrderedVector:
 
     # O(n)
     def print(self):
-        print("\n## Print")
         if self.last_index == -1:
             print("Empty list")
         else:
@@ -25,7 +24,6 @@ class OrderedVector:
 
         # Check if vector is full (returning -1 if full) - O(1)
         if self.last_index == self.size:
-            print("Vector is full")
             return -1
 
         # Search index to insert - for O(n)
@@ -50,7 +48,6 @@ class OrderedVector:
 
     # O(n)
     def find(self, value):
-
         for i in range(self.last_index+1):
             if value < self.values[i]:
                 # If less than first in an ordered vector, so the element do not exist
@@ -62,18 +59,48 @@ class OrderedVector:
         # Not found
         return -1
 
+    def exclude(self, value):
+        
+        # Find value's index
+        index_value = self.find(value=value)
+
+        if index_value == -1:
+            return False
+        
+        # Reorder vaetor inside of index value
+        for i in range(index_value, self.last_index):
+            self.values[i] = self.values[i+1]
+        
+        # update last index
+        self.last_index -=1
+        return True
+
+
 v = OrderedVector(size=10)
-v.print()
-v.insert(5)
-v.print()
-v.insert(4)
-v.print()
-v.insert(7)
-v.print()
-v.insert(1)
+
+print("\nInsert 5 ...", v.insert(5))
 v.print()
 
-print("Find: ", v.find(7))
-print("Find: ", v.find(1))
-print("Find: ", v.find(9))
+print("\nInsert 4 ...", v.insert(4))
+v.print()
 
+print("\nInsert 7 ...", v.insert(7))
+v.print()
+
+print("\nInsert 1 ...", v.insert(1))
+v.print()
+
+print("\nFind 4 ...", v.find(7))
+print("\nFind 1 ...", v.find(1))
+print("\nFind 9 ...", v.find(9))
+
+print("\nExclude 10 ...", v.exclude(10))
+v.print()
+print("\nExclude 1 ...", v.exclude(1))
+v.print()
+print("\nExclude 7 ...", v.exclude(7))
+v.print()
+print("\nExclude 4 ...", v.exclude(4))
+v.print()
+print("\nExclude 5 ...", v.exclude(5))
+v.print()
