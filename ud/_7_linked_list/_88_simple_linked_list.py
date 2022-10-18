@@ -46,10 +46,27 @@ class LinkedList:
         """
         print("Show linked list: ", end = ' ')
         current: Node = self.first
+
+        if not current:
+            print('Empty list')
+            return
         while current is not None:
             print(current.value, end = ' ')
             current = current.next
         print()
+
+    def search(self, value):
+        """
+        Search and return value. If not found, return None
+        """
+        current: Node = self.first
+        while current is not None:
+            if current.value == value:
+                print(f"Found value {value}! =)")
+                return value
+            current = current.next
+        print(f"Value {value} not found! =(")
+        return None
 
 
 linked_list: LinkedList = LinkedList()
@@ -63,6 +80,9 @@ linked_list.show()
 
 linked_list.add_first(3)
 linked_list.show()
+
+linked_list.search(2)
+linked_list.search(10)
 
 linked_list.remove_first()
 linked_list.show()
