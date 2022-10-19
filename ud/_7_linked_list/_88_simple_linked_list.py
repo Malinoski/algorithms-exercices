@@ -68,27 +68,74 @@ class LinkedList:
         print(f"Value {value} not found! =(")
         return None
 
+    def remove(self, value):
+        """
+        Remove node with value
+        """
+
+        current: Node = self.first
+
+        if current is None:
+            # Empty
+            print(f"Cant remove {value}. Empty list")
+            return
+        elif current.value is value:
+            # First element
+            print(f"Removing value {current.value}")
+            self.first = current.next
+            return
+        else:
+
+            # Middle elements
+            while current.next is not None:
+                if current.next.value == value:
+                    print(f"Removing value {current.next.value}")
+                    current.next = current.next.next
+                    return
+                current = current.next
+
+            # Last elemnt
+            if current.value == value:
+                print(f"Removing value {current.value}")
+                current = None
+                return
+            print(f"Could not remove {current.value}. Value not found")
+
 
 linked_list: LinkedList = LinkedList()
 linked_list.show()
 
+# Test add first
 linked_list.add_first(1)
 linked_list.show()
-
 linked_list.add_first(2)
 linked_list.show()
-
 linked_list.add_first(3)
 linked_list.show()
 
+# Test search
 linked_list.search(2)
 linked_list.search(10)
 
+# Test remove first
+linked_list.remove_first()
+linked_list.show()
+linked_list.remove_first()
+linked_list.show()
 linked_list.remove_first()
 linked_list.show()
 
-linked_list.remove_first()
+# Test remove
+linked_list.add_first(4)
+linked_list.add_first(5)
+linked_list.add_first(6)
+linked_list.add_first(7)
 linked_list.show()
-
-linked_list.remove_first()
+linked_list.remove(5)
+linked_list.show()
+linked_list.remove(6)
+linked_list.show()
+linked_list.remove(4)
+linked_list.show()
+linked_list.remove(7)
 linked_list.show()
