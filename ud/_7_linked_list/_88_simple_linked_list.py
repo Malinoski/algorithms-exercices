@@ -79,27 +79,29 @@ class LinkedList:
             # Empty
             print(f"Cant remove {value}. Empty list")
             return
-        elif current.value is value:
-            # First element
+
+        # First element
+        if current.value is value:
             print(f"Removing value {current.value}")
             self.first = current.next
             return
-        else:
 
-            # Middle elements
-            while current.next is not None:
-                if current.next.value == value:
-                    print(f"Removing value {current.next.value}")
-                    current.next = current.next.next
-                    return
-                current = current.next
-
-            # Last elemnt
-            if current.value == value:
-                print(f"Removing value {current.value}")
-                current = None
+        # Middle elements
+        while current.next is not None:
+            if current.next.value == value:
+                print(f"Removing value {current.next.value}")
+                current.next = current.next.next
                 return
-            print(f"Could not remove {current.value}. Value not found")
+            current = current.next
+
+        # Last elemnt
+        if current.value == value:
+            print(f"Removing value {current.value}")
+            current = None
+            return
+
+        # Not found
+        print(f"Could not remove {value}. Value not found")
 
 
 linked_list: LinkedList = LinkedList()
@@ -131,6 +133,7 @@ linked_list.add_first(5)
 linked_list.add_first(6)
 linked_list.add_first(7)
 linked_list.show()
+linked_list.remove(20)
 linked_list.remove(5)
 linked_list.show()
 linked_list.remove(6)
