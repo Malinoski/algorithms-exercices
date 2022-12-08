@@ -16,7 +16,7 @@ def insertion_sort(values: List[int]):
         target = values[i]
         for j in range(i, -1, -1):
 
-            if (i!=j) and (target < values[j]):
+            if target < values[j]:
                 temp = values[j+1]
                 values[j+1] = values[j]
                 values[j] = temp
